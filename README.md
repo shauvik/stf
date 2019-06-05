@@ -3,36 +3,51 @@
 [![Build Status](https://travis-ci.org/openstf/stf.svg?branch=master)](https://travis-ci.org/openstf/stf)
 [![Docker Pulls](https://img.shields.io/docker/pulls/openstf/stf.svg)](https://hub.docker.com/r/openstf/stf/)
 [![NPM version](https://img.shields.io/npm/v/stf.svg)](https://www.npmjs.com/package/stf)
+[![Backers on Open Collective](https://opencollective.com/openstf/backers/badge.svg)](#backers) [![Sponsors on Open Collective](https://opencollective.com/openstf/sponsors/badge.svg)](#sponsors)
 
 **STF** (or Smartphone Test Farm) is a web application for debugging smartphones, smartwatches and other gadgets remotely, from the comfort of your browser.
 
-STF was originally developed at [CyberAgent](https://www.cyberagent.co.jp/en/) to control a growing collection of more than 160 devices. As of July 2016 development is mainly sponsored by [HeadSpin](https://headspin.io/) and [other individual contributors](https://www.bountysource.com/teams/openstf).
+STF was originally developed at [CyberAgent](https://www.cyberagent.co.jp/en/) to control a growing collection of more than 160 devices. As of July 2016 development is mainly sponsored by [HeadSpin](https://performance.headspin.io/) and [other individual contributors](https://opencollective.com/openstf).
 
-Please visit [our  BountySource](https://salt.bountysource.com/teams/openstf) if you'd like to support future development. How are your donations being used? Check out our [donation transparency report](DONATION-TRANSPARENCY.md).
+We  welcome financial contributions in full transparency on our [open collective](https://opencollective.com/openstf).
 
 ![Close-up of device shelf](doc/shelf_closeup_790x.jpg?raw=true)
 
 ![Super short screencast showing usage](doc/7s_usage.gif?raw=true)
 
-## Sponsors
+## Credits
 
-### Gold Sponsor
+### Sponsors
+
+Thank you to all our sponsors! (please ask your company to also support this open source project by [becoming a sponsor](https://opencollective.com/openstf#sponsor))
+
+#### Gold Sponsor
 
 [<img src="doc/sponsors/headspin-wordmark-orange.png?raw=true" alt="HeadSpin" width="400">](https://headspin.io/)
 
-> [HeadSpin](https://headspin.io/) enables developers launch high quality and high performing apps Worldwide. Using HeadSpin’s global distributed device cloud infrastructure, developers can test and monitor their apps instantly on 1,500 global cell networks and local devices. HeadSpin seamlessly plugs into your development workflow with no code changes to your apps.
+> [HeadSpin](https://headspin.io/) provides secure and scalable STF for iOS integrated with Appium/XCTest/Selenium/Espresso, High speed interaction Audio/Video/Game testing and AI based Root cause analysis for Performance Management. It's free to start using HeadSpin in 150+ locations worldwide! [Try it out for free.](https://ui-dev.headspin.io/signup/23feaa95fec34c49a1da309380807795)
 
 HeadSpin offers a generous monthly contribution towards STF development.
 
+### Contributors
+Thank you to all the people who have already contributed to STF!
+<a href="../../graphs/contributors"><img src="https://opencollective.com/openstf/contributors.svg?width=890" /></a>
+
+### Backers
+Thank you to all our backers! [[Become a backer](https://opencollective.com/openstf#backer)]
+
+<a href="https://opencollective.com/openstf#backers" target="_blank"><img src="https://opencollective.com/openstf/backers.svg?width=890"></a>
+
+
 ### How to become a sponsor
 
-Please [contact us][contact-link] for sponsor arrangements. Both recurring and one-time contributions are most welcome. Contributions towards a specific issue or feature are also possible, and can be attributed to your company in our release notes and other related materials. Hardware-only contributions, whether new or used, are also extremely helpful and well received, especially if you find a device that doesn't work. Please see our [donation transparency report](DONATION-TRANSPARENCY.md) for past hardware contributions.
+Please use our [open collective](https://opencollective.com/openstf#sponsor) or [contact us][contact-link] directly for sponsor arrangements. Both recurring and one-time contributions are most welcome. Contributions towards a specific issue or feature are also possible, and can be attributed to your company in our release notes and other related materials. Hardware-only contributions, whether new or used, are also extremely helpful and well received, especially if you find a device that doesn't work. Please see our [donation transparency report](DONATION-TRANSPARENCY.md) for past hardware contributions.
 
 ## Features
 
 * OS support
   - Android
-    * Supports versions 2.3.3 (SDK level 10) to 7.1 (SDK level 25)
+    * Supports versions 2.3.3 (SDK level 10) to 9.0 (SDK level 28)
     * Supports Wear 5.1 (but not 5.0 due to missing permissions)
     * Supports Fire OS, CyanogenMod, and other heavily Android based distributions
     * `root` is **not** required for any current functionality
@@ -110,7 +125,7 @@ As the product has evolved from an internal tool running in our internal network
 
 Note that you need these dependencies even if you've installed STF directly from [NPM](https://www.npmjs.com/), because they can't be included in the package.
 
-On OS X, you can use [homebrew](http://brew.sh/) to install most of the dependencies:
+On Mac OS, you can use [homebrew](http://brew.sh/) to install most of the dependencies:
 
 ```bash
 brew install rethinkdb graphicsmagick zeromq protobuf yasm pkg-config
@@ -122,7 +137,7 @@ We also provide a [Docker](http://docker.com/) container in the [Docker Hub](htt
 
 You should now be ready to [build](#building) or [run](#running) STF.
 
-Note that while OS X can be used for development, it doesn't provide a very reliable experience in production due to (presumed) bugs in ADB's OS X implementation. We use [CoreOS](https://coreos.com/) but any Linux or BSD distribution should do fine.
+Note that while Mac OS can be used for development, it doesn't provide a very reliable experience in production due to (presumed) bugs in ADB's Mac OS implementation. We use [CoreOS](https://coreos.com/) but any Linux or BSD distribution should do fine.
 
 ## Installation
 
@@ -257,7 +272,7 @@ There can be various reasons for this behavior. Some especially common reasons a
 * USB debugging is not enabled
   - Enable it.
 * USB debugging is enabled but the USB connection mode is wrong
-  - Try switching between MTP and PTP modes and see if the device appears. This happens fairly often on OS X but almost never on Linux.
+  - Try switching between MTP and PTP modes and see if the device appears. This happens fairly often on Mac OS but almost never on Linux.
 * You don't have the ADB daemon running
   - Make sure ADB is running with `adb start-server`.
 * You haven't authorized the ADB key yet
@@ -298,8 +313,8 @@ Again, there can be various reasons for this behavior as well. Some common reaso
   - Can't help with that.
 * Someone removed the device physically.
   - Or that.
-* You're on OS X
-  - There's a bug in ADB's OS X implementation that causes devices to be lost on error conditions. The problem is more pronounced when using USB hubs. You have to unplug and then plug it back in again.
+* You're on Mac OS
+  - There's a bug in ADB's Mac OS implementation that causes devices to be lost on error conditions. The problem is more pronounced when using USB hubs. You have to unplug and then plug it back in again.
 * The USB hub broke
   - Happens. Just try a new one.
 
@@ -422,6 +437,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 See [LICENSE](LICENSE).
 
-Copyright © The OpenSTF Project. All Rights Reserved.
+Copyright © 2017 The OpenSTF Project. All Rights Reserved.
 
 [contact-link]: mailto:contact@openstf.io

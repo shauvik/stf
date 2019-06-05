@@ -1,21 +1,100 @@
 # Changelog
 
-## HEAD
+## 3.4.1 (2019-05-03)
+
+### Fixes
+
+- Updated [adbkit-apkreader](https://github.com/openstf/adbkit-apkreader) to fix an APK manifest parsing issue on applications processed by 360 encryption services, which changes the `application` key to `com.stub.StubApp`. Thanks @JChord!
+- Updated [adbkit](https://github.com/openstf/adbkit) to public key parsing on recent versions of ADB. Thanks @codeskyblue!
 
 ### Enhancements
 
+- Exposed the [`ZMQ_IPV6`](http://api.zeromq.org/3-3:zmq-ctx-set#toc5) environment variable, making it possible to enable IPv6 for ZeroMQ. Thanks @aokhotin!
+
+## 3.4.0 (2018-08-09)
+
+### Enhancements
+
+- Android 9.0 is now supported. This feature was sponsored by [HeadSpin](https://headspin.io/).
+- The OAuth2 unit now supports state tokens. Thanks @quangola!
+- [STFService.apk](https://github.com/openstf/STFService.apk) can now display the identity activity (red screen) automatically if a device gets disconnected from USB (or ADB), which can make maintenance easier. This feature is in beta, please enable it by running `adb shell pm grant jp.co.cyberagent.stf android.permission.DUMP` on the devices you want to try it on. Thanks @Malinskiy!
+
+### Fixes
+
+- Use `ps -lef` instead of `ps` to list pids on Android 8.x. In new versions, `ps` doesn't return anything. Thanks @thinkhy!
+
+## 3.3.1 (2018-07-14)
+
+### Fixes
+
+- Fixed ADB's new device states (`connecting`, `authorizing`) not being recognized by STF. Thanks @obrie!
+- Updated [STFService.apk](https://github.com/openstf/STFService.apk) to fix an issue on high aspect ratio devices like the Mi Mix 2 where a portion of the screen may not have been visible.
+- Updated [adbkit-apkreader](https://github.com/openstf/adbkit-apkreader) to resolve issues with certain APK files that were unparseable and therefore could not be installed. The issue was with long strings in the manifest file.
+- Updated [minitouch](https://github.com/openstf/minitouch) to fix touch detection issues on Meizu Pro7 Plus.
+
+## 3.3.0 (2018-03-25)
+
+### Enhancements
+
+- Added a new column to the device list that displays the OpenGL ES version of each device. Note that you may have to reset the columns once if you can't see it. Thanks @koral--!
+- Added a new `--no-screen-reset` option to disable the default behavior of resetting rotation and returning to the home screen after a user stops using a device. Thanks @0rzech!
+- Added a new `--saml-id-provider-callback-url` option to the auth-saml2 unit. Thanks @0rzech!
+
+### Fixes
+
+- Fixed a setup issue with TPS650.
+- Fixed an issue where most uploads would fail due to a breaking configuration change in a dependency.
+- Updated [minitouch](https://github.com/openstf/minitouch) to fix multitouch issues on some devices that require the `BTN_TOUCH` kernel event. Lifting a contact while having and keeping one held down may have prevented any events from being processed until a new touchdown event.
+
+## 3.2.0 (2017-12-06)
+
+### Enhancements
+
+- Android 8.1 is now supported.
+- The network column in the device list is now based on a value that gets updated in real time. The format of the column has changed slightly due to this change.
+- The `--mute-master` option now accepts the values `never` (default), `inuse` (only when a device is being used), and `always` (mute pre-emptively during setup phase). For backwards compatibility, `--mute-master` with no value maps to `inuse`, and `--no-mute-master` to `never`.
+- The battery level and battery temperature columns are now filterable with comparison operators.
+- Log output now includes a timestamp.
+
+### Fixes
+
+- Fixed an issue on Windows where our device binaries may have failed to install due to an `Out of fallback locations` error caused by a faulty mode check. Thanks @iqianxing!
+
+## 3.1.0 (2017-08-31)
+
+### Enhancements
+
+- Android 8.0 is now supported. Please note that Android O developer previews are no longer officially supported, though they may or may not still work.
+
+## 3.0.1 (2017-08-21)
+
+### Fixes
+
+- Updated [adbkit](https://github.com/openstf/adbkit) to fix `RangeError: Index out of range` errors when parsing newer APKs that use UTF-8 encoding for their string pools.
+
+## 3.0.0 (2017-08-09)
+
+### Enhancements
+
+- Added support for Android O Developer Preview 1 (note that any later previews are not supported yet)
 - You can now set screen JPEG quality with the `SCREEN_JPEG_QUALITY` environment variable at launch time. Can be useful for slow networks.
 - Switched to [yargs](http://yargs.js.org) for option parsing to make it easier to modify the CLI.
 - Almost all command line options can now be specified with environment variables.
 - Internal commands are now hidden from help output but can still be used.
 - Running the `stf` binary without a command now errors and shows help output (previously there was no output whatsoever).
 - Improved help messages for various options.
+- Added an app switch key. Thanks @koral--!
 
 ### Fixes
 
 - Fixed Lenovo A806 and most likely other cheap Lenovo devices as well by updating [adbkit](https://github.com/openstf/adbkit).
 - Fixed ZUK Z1, Z2 and others by adding an alternate install location for our binaries, since `/data/local/tmp` is mounted as noexec on those devices. Thanks @dkw72n!
 - Updated [adbkit-apkreader](https://github.com/openstf/adbkit-apkreader) to resolve issues with certain APK files that were unparseable and therefore failed installation. We've only seen a single a single APK with this issue, but there could be more.
+- Updated [adbkit-apkreader](https://github.com/openstf/adbkit-apkreader) to resolve another unrelated parsing issue with slightly malformed manifest files.
+- Updated [adbkit](https://github.com/openstf/adbkit) to resolve an issue where trailing spaces in an adb public key would cause an error during adb connect.
+- Updated [adbkit](https://github.com/openstf/adbkit) to resolve issues with log parsing on Android 7.0 and later, caused by Android no longer transforming `\n` to `\r\n`.
+- Updated [adbkit](https://github.com/openstf/adbkit) to resolve an issue with recent versions of ADB that include a null byte in `adbkey.pub`, which was causing validation to fail.
+- Fixed [minitouch](https://github.com/openstf/minitouch) on Blackberry PRIV.
 
 ### Misc
 
